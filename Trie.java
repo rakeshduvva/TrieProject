@@ -1,5 +1,5 @@
 
-import java.util.Scanner;
+import java.util.*;
 
 class Trie {
     private Trie[] children;
@@ -64,12 +64,45 @@ class Trie {
     boolean doesExist(Trie root, String s) {
         Trie current = root;
         for(char ch:s.toCharArray()) {
-            int index = ch - 'a';
+            int index=ch-'a';
             if(current.children[index] == null) {
                 return false;
             }
             current = current.children[index];
         }
         return current.isEndOfWord;
+        }
+
+        void getAllWords(Trie node, String prefix, List<String> result) {
+            if (node.isEndOfWord) {
+                result.add(prefix);
+            }
+            for(int i=0;i<26;i++) {
+                if(node.children[i]!=null) {
+                    char nextChar=(char) (i + 'a');
+                    getAllWords(node.children[i], prefix + nextChar, result);
+                }
+            }
+        }
+
+        List<String> getAllWords() {
+            List<String> result = new ArrayList<>();
+            getAllWords(root, "", result);
+            return result;
+        }
+
+        List<String> getWordsWithPrefix(String prefix) {
+            Trie current=root;
+            for (char ch:prefix.toCharArray()) {
+                int index=ch-'a';
+                if (current.children[index] == null) {
+                    return new ArrayList<>();
+                }
+                current = current.children[index];
+            }
+            List<String> result = new ArrayList<>();
+            getAllWords(current, prefix, result);
+            return result;
+
     }
 }
