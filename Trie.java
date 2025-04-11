@@ -41,6 +41,10 @@ class Trie {
                     break;
                 case 3:
                     System.out.println("All words in the Trie: ");
+                    List<String> allWords = trie.getAllWords();
+                    for (String word : allWords) {
+                        System.out.println(word);
+                    }
                     break;
                 case 4:
                     System.out.println("Enter the prefix to search: ");
