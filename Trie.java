@@ -48,8 +48,18 @@ class Trie {
                     break;
                 case 4:
                     System.out.println("Enter the prefix to search: ");
-                    break;
-            }
+                    String prefix = sc.nextLine();
+                    List<String> wordsWithPrefix = trie.getWordsWithPrefix(prefix);
+                    if (wordsWithPrefix.isEmpty()) {
+                        System.out.println("No words found with the given prefix.");
+                    } else {
+                        System.out.println("Words with the given prefix: ");
+                        for (String word : wordsWithPrefix) {
+                            System.out.println(word);
+                        }
+                    }
+                    break; 
+                }
         } while (choice != 0);
     }
 
